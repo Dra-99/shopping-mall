@@ -5,14 +5,13 @@
     <TodayRecommend />
     <Rank />
     <Like />
-    <Floor />
-    <Floor />
+    <Floor v-for="(item, index) in floorData" :itemData="item" :key="index" />
     <Brand />
   </div>
 </template>
 
 <script>
-import TypeNav from "@/views/Home/TypeNav";
+import TypeNav from "@/components/TypeNav";
 import ListContainer from "@/views/Home/ListContainer"
 import TodayRecommend from "@/views/Home/TodayRecommend"
 import Rank from "@/views/Home/Rank"
@@ -21,7 +20,7 @@ import Floor from "@/views/Home/Floor"
 import Brand from "@/views/Home/Brand"
 
 import { mapState, mapActions } from "vuex"
-
+import { getFloorData } from "@/api"
 export default {
   components: {
     TypeNav,
@@ -32,6 +31,11 @@ export default {
     Floor,
     Brand
   },
+  data() {
+    return {
+      floorData: []
+    }
+  },
   computed: {
     ...mapState('home', {
       count: state => state.count
@@ -39,6 +43,10 @@ export default {
   },
   methods: {
     ...mapActions('home', ['add'])
+  },
+  async mounted() {
+    const data = await getFloorData();
+    this.floorData = data;
   }
 }
 </script>

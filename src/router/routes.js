@@ -13,7 +13,7 @@ export default [
         }
     },
     {
-        path: '/search',
+        path: '/search/:keywords?',
         component: Search,
         name: 'search',
         meta: {

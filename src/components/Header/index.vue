@@ -56,12 +56,17 @@ export default {
     },
     methods: {
         navigateSearch() {
-            this.$router.push({
-                name: 'search',
-                params: {
-                    keywords: this.keywords
-                }
-            })
+            const loction = {
+              name: 'search'
+            }
+            loction.params = {
+              keywords: this.keywords
+            }
+            if (Object.keys(this.$route.query).length) {
+              loction.query = this.$route.query
+            }
+            this.$router.push(loction)
+            this.keywords = ''
         }
     },
     created() {

@@ -9,6 +9,7 @@
 <script>
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import { mapActions } from "vuex"
 export default {
   name: 'App',
   components: {
@@ -19,6 +20,12 @@ export default {
     showFooter() {
       return this.$route.meta.showFooter
     }
+  },
+  methods: {
+    ...mapActions("home", ["queryCategoryList"]),
+  },
+  mounted() {
+    this.queryCategoryList()
   }
 }
 </script>
